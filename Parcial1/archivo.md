@@ -24,93 +24,93 @@ La aceleracion de la CPU frente a la GPU fueron:
 
 Datos obtenidos:
 
-- Matriz1 20x20 Matriz 2 20x10 
-Ciclo numero 1
-Tiempo en CPU: 0.0000170000
-Tiempo en GPU: 0.0000550000
-Ciclo numero 2
-Tiempo en CPU: 0.0000160000
-Tiempo en GPU: 0.0000380000
-Ciclo numero 3
-Tiempo en CPU: 0.0000160000
-Tiempo en GPU: 0.0000370000
-Ciclo numero 4
-Tiempo en CPU: 0.0000160000
-Tiempo en GPU: 0.0000360000
-Ciclo numero 5
-Tiempo en CPU: 0.0000160000
-Tiempo en GPU: 0.0000360000
+- Matriz1 20x20 Matriz 2 20x10   
+Ciclo numero 1  
+Tiempo en CPU: 0.0000170000  
+Tiempo en GPU: 0.0000550000  
+Ciclo numero 2  
+Tiempo en CPU: 0.0000160000  
+Tiempo en GPU: 0.0000380000  
+Ciclo numero 3  
+Tiempo en CPU: 0.0000160000  
+Tiempo en GPU: 0.0000370000  
+Ciclo numero 4  
+Tiempo en CPU: 0.0000160000  
+Tiempo en GPU: 0.0000360000  
+Ciclo numero 5  
+Tiempo en CPU: 0.0000160000  
+Tiempo en GPU: 0.0000360000  
 
-- Matriz 1 50x50 Matriz2 50x30
-Ciclo numero 1
-Tiempo en CPU: 0.0003090000
-Tiempo en GPU: 0.0002300000
-Ciclo numero 2
-Tiempo en CPU: 0.0003090000
-Tiempo en GPU: 0.0002130000
-Ciclo numero 3
-Tiempo en CPU: 0.0003090000
-Tiempo en GPU: 0.0002120000
-Ciclo numero 4
-Tiempo en CPU: 0.0003080000
-Tiempo en GPU: 0.0002130000
-Ciclo numero 5
-Tiempo en CPU: 0.0003080000
-Tiempo en GPU: 0.0002120000
+- Matriz 1 50x50 Matriz2 50x30  
+Ciclo numero 1  
+Tiempo en CPU: 0.0003090000  
+Tiempo en GPU: 0.0002300000  
+Ciclo numero 2  
+Tiempo en CPU: 0.0003090000  
+Tiempo en GPU: 0.0002130000  
+Ciclo numero 3  
+Tiempo en CPU: 0.0003090000  
+Tiempo en GPU: 0.0002120000  
+Ciclo numero 4  
+Tiempo en CPU: 0.0003080000  
+Tiempo en GPU: 0.0002130000  
+Ciclo numero 5  
+Tiempo en CPU: 0.0003080000  
+Tiempo en GPU: 0.0002120000  
 
--Matriz 1 100x100 Matriz 2 100x50
+-Matriz 1 100x100 Matriz 2 100x50  
 
-Ciclo numero 1
-Tiempo en CPU: 0.0020530000
-Tiempo en GPU: 0.0012960000
-Ciclo numero 2
-Tiempo en CPU: 0.0020490000
-Tiempo en GPU: 0.0012760000
-Ciclo numero 3
-Tiempo en CPU: 0.0020520000
-Tiempo en GPU: 0.0012740000
-Ciclo numero 4
-Tiempo en CPU: 0.0020510000
-Tiempo en GPU: 0.0012760000
-Ciclo numero 5
-Tiempo en CPU: 0.0020530000
-Tiempo en GPU: 0.001276000
+Ciclo numero 1  
+Tiempo en CPU: 0.0020530000  
+Tiempo en GPU: 0.0012960000  
+Ciclo numero 2  
+Tiempo en CPU: 0.0020490000  
+Tiempo en GPU: 0.0012760000  
+Ciclo numero 3  
+Tiempo en CPU: 0.0020520000  
+Tiempo en GPU: 0.0012740000  
+Ciclo numero 4  
+Tiempo en CPU: 0.0020510000  
+Tiempo en GPU: 0.0012760000  
+Ciclo numero 5  
+Tiempo en CPU: 0.0020530000  
+Tiempo en GPU: 0.001276000  
 
-- Matriz1 500x300 Matriz2 300x100
+- Matriz1 500x300 Matriz2 300x100  
 
-Ciclo numero 1
-Tiempo en CPU: 0.0615470000
-Tiempo en GPU: 0.0368210000
-Ciclo numero 2
-Tiempo en CPU: 0.0618420000
-Tiempo en GPU: 0.0367630000
-Ciclo numero 3
-Tiempo en CPU: 0.0615110000
-Tiempo en GPU: 0.0367430000
-Ciclo numero 4
-Tiempo en CPU: 0.0615020000
-Tiempo en GPU: 0.0367520000
-Ciclo numero 5
-Tiempo en CPU: 0.0615230000
-Tiempo en GPU: 0.0367640000
+Ciclo numero 1  
+Tiempo en CPU: 0.0615470000  
+Tiempo en GPU: 0.0368210000  
+Ciclo numero 2  
+Tiempo en CPU: 0.0618420000  
+Tiempo en GPU: 0.0367630000  
+Ciclo numero 3  
+Tiempo en CPU: 0.0615110000  
+Tiempo en GPU: 0.0367430000  
+Ciclo numero 4  
+Tiempo en CPU: 0.0615020000  
+Tiempo en GPU: 0.0367520000  
+Ciclo numero 5  
+Tiempo en CPU: 0.0615230000  
+Tiempo en GPU: 0.0367640000  
 
-- Matriz 1 1000x1000 Matriz2 1000x1000
+- Matriz 1 1000x1000 Matriz2 1000x1000  
 
-Ciclo numero 1
-Tiempo en CPU: 5.6908960000
-Tiempo en GPU: 0.1392650000
-Ciclo numero 2
-Tiempo en CPU: 5.6901750000
-Tiempo en GPU: 0.1387620000
-Ciclo numero 3
-Tiempo en CPU: 5.6934840000
-Tiempo en GPU: 0.1387870000
-Ciclo numero 4
-Tiempo en CPU: 4.1856190000
-Tiempo en GPU: 0.1362160000
-Ciclo numero 5
-Tiempo en CPU: 4.1385550000
-Tiempo en GPU: 0.1255580000
+Ciclo numero 1  
+Tiempo en CPU: 5.6908960000  
+Tiempo en GPU: 0.1392650000  
+Ciclo numero 2  
+Tiempo en CPU: 5.6901750000  
+Tiempo en GPU: 0.1387620000  
+Ciclo numero 3  
+Tiempo en CPU: 5.6934840000  
+Tiempo en GPU: 0.1387870000  
+Ciclo numero 4  
+Tiempo en CPU: 4.1856190000  
+Tiempo en GPU: 0.1362160000  
+Ciclo numero 5  
+Tiempo en CPU: 4.1385550000  
+Tiempo en GPU: 0.1255580000  
 
 #### Conclusiones:
 - Cuando se manejan matrices de tamaños pequeños o medianos, la diferencia en tiempo y aceleracion de la CPU frente a la GPU no es significativa.
