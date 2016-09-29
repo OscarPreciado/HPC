@@ -22,7 +22,7 @@ Los tiempos de la CPU frente a la GPU fueron:
 La aceleracion de la CPU frente a la GPU fueron:
 ![alt text](https://github.com/OscarPreciado/HPC/blob/master/Parcial1/aceleracion.png)
 
-#### Concluciones:
+#### Conclusiones:
 - Cuando se manejan matrices de tamaños pequeños o medianos, la diferencia en tiempo y aceleracion de la CPU frente a la GPU no es significativa.
 - Cuando se manejan matrices de tamaños grandes o enormes, la diferencia en tiempo y aceleracion de la CPU frente a la GPU es muy significativa.
 - Con base en los resultados se concluye que el desepeño de la GPU es superior frente a la CPU frente a matrices de gran tamaño.
