@@ -1,6 +1,6 @@
 # PARCIAL 1 HPC
 
-##### Estudaintes:
+##### Estudiantes:
 - Cristian Ciro
 - Oscar Preciado
 
