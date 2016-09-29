@@ -14,10 +14,10 @@
 #### Resultados:
 
 Los tamaños escogidos para las tablas fueron:
-![alt text](https://github.com/OscarPreciado/HPC/blob/master/Parcial1/tamaños.png)
+![alt text](https://github.com/OscarPreciado/HPC/blob/master/Parcial1/promedio.png)
 
 Los tiempos de la CPU frente a la GPU fueron:
-![alt text](https://github.com/OscarPreciado/HPC/blob/master/Parcial1/tiempos.png)
+![alt text](https://github.com/OscarPreciado/HPC/blob/master/Parcial1/tiempo.png)
 
 La aceleracion de la CPU frente a la GPU fueron:
 ![alt text](https://github.com/OscarPreciado/HPC/blob/master/Parcial1/aceleracion.png)
