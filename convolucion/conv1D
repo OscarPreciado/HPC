@@ -1,0 +1,142 @@
+#include <stdio.h>
+#include <iostream>
+#include <cuda.h>
+
+#define A 6 // tamaño del input
+#define B 3 // tamaño de la mascara
+
+using namespace std;
+
+void conv_cpu(float *N, float *M, float *P, int maskWidth, int width)
+{
+	
+	float Pvalue;
+
+	for(int i = 0; i < width; i++){
+    Pvalue = 0;
+		int nStartPoint = i - (maskWidth / 2);
+		for(int j = 0; j < maskWidth; j++){
+			if (nStartPoint + j >= 0 && nStartPoint + j < width){
+				Pvalue += N[nStartPoint + j] * M[j];
+			}
+		}
+		P[i] = Pvalue;
+	}
+}  
+
+__global__ void conv_gpu(float *N, float *M, float *P, int maskWidth, int width)
+{
+	int i = blockIdx.x * blockDim.x + threadIdx.x;
+	float Pvalue = 0.0;
+	int N_start_point = i-(maskWidth/2);
+	
+	if(i < width){
+		for(int j = 0; j < maskWidth; j++){
+			if(N_start_point + j >= 0 && N_start_point + j < width){
+				Pvalue += N[N_start_point + j]*M[j];
+			}
+		}
+		P[i] = Pvalue;
+	}
+  
+}
+
+void init(float *vec, int tam)
+{
+  float val= 1.0;
+  for (int i=0; i < tam; i++){
+    vec[i]= rand() % 10;
+    val+= 1.0;
+  }
+}
+
+void print1d(float *vec, int tam)
+{
+  for(int i=0; i < tam; i++){
+    cout<<vec[i]<<"  ";
+  }
+}
+  
+
+int main()
+{
+  clock_t start, end;
+  float *h_M, *h_N, *h_P;
+  float *d_M, *d_N,*d_P;
+  cudaError_t error = cudaSuccess;
+  h_M = (float*)malloc(A);
+  h_N = (float*)malloc(B);
+  h_P = (float*)malloc(A);
+  int size1 = A * sizeof(float);
+  int size2 = B * sizeof(float);
+  
+  init(h_M, A); //input
+  init(h_N, B); //mask
+  
+  //convolucion cpu
+  
+  start = clock();
+  conv_cpu(h_M, h_N, h_P, B, A);
+  end = clock();
+	double cpu_time_used = double(end - start) / CLOCKS_PER_SEC;
+	printf("Tiempo en CPU: %.10f\n",cpu_time_used);
+  
+  
+  //convolucion gpu
+    
+  	
+  	error = cudaMalloc((void**)&d_M,size1);
+    if(error != cudaSuccess){
+        printf("Error reservando memoria para d_M");
+        exit(0);
+    }
+
+    error = cudaMalloc((void**)&d_N,size2);
+    if(error != cudaSuccess){
+        printf("Error reservando memoria para d_N");
+        exit(0);
+    }
+
+    error = cudaMalloc((void**)&d_P,size1);
+    if(error != cudaSuccess){
+        printf("Error reservando memoria para d_P");
+        exit(0);
+    }
+ 
+	
+  
+    
+    error = cudaMemcpy(d_M, h_M, size1, cudaMemcpyHostToDevice);
+	if(error != cudaSuccess){
+        printf("Error copiando datos a d_M");
+        exit(0);
+    }
+    
+    error = cudaMemcpy(d_N, h_N, size2, cudaMemcpyHostToDevice);
+    if(error != cudaSuccess){
+        printf("Error copiando datos a d_N");
+        exit(0);
+    }
+  
+    start = clock();
+    conv_gpu<<<256, 1>>>(d_M, d_N, d_P, B, A);
+    cudaMemcpy(h_P,d_P,size1,cudaMemcpyDeviceToHost);
+    end = clock();
+  cudaFree(d_M);
+  cudaFree(d_N);
+  cudaFree(d_P);
+  
+	double gpu_time_used = double(end - start) / CLOCKS_PER_SEC;
+	printf("Tiempo en GPU: %.10f\n",gpu_time_used);
+
+  //impriimos el vector
+  cout<<"Vector input"<<endl;
+  print1d(h_M,A);
+  cout<<endl;
+  cout<<"Vector mascara"<<endl;
+  print1d(h_N,B);
+  cout<<endl;
+  cout<<"Convolucion"<<endl;
+	print1d(h_P,A);
+	return 0;
+}
