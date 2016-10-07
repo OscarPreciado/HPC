@@ -1,0 +1,159 @@
+#include <stdio.h>
+#include <iostream>
+#include <cuda.h>
+#include <stdlib.h>
+
+#define A 3 // mascara
+#define B 4 // matrix w
+#define C 5 // matrix h
+using namespace std;
+
+void conv_cpu(float *N, float *M, float *P, int maskWidth, int w, int h)
+{
+	for (int row = 0; row < h; row ++){
+		for (int col = 0; col < w; col ++){
+			float val = 0.0;
+			int N_start_col = col - (maskWidth/2);
+			int N_start_row = row - (maskWidth/2);
+			for (int j = 0; j < maskWidth; j++){
+				for (int k = 0; k < maskWidth; k++){
+					int curRow = N_start_row + j;
+					int curCol = N_start_col + k;
+					if(curRow > -1 && curRow < h && curCol > -1 && curCol < w){
+						val += N[curRow * w + curCol] * M[j*maskWidth+k];
+					}
+				}
+			}
+			P[row * w + col] = val;
+			
+		}
+	}
+}  
+
+__global__ void conv_gpu(float *N, float *M, float *P, int maskWidth, int w, int h)
+{
+	int col = blockIdx.x * blockDim.x + threadIdx.x;
+	int row = blockIdx.y * blockDim.y + threadIdx.y;
+	if(col < w && row < h){
+		float val = 0.0;
+		int N_start_col = col - (maskWidth/2);
+		int N_start_row = row - (maskWidth/2);
+		for (int j = 0; j < maskWidth; j++){
+			for (int k = 0; k < maskWidth; k++){
+				int curRow = N_start_row + j;
+				int curCol = N_start_col + k;
+				if(curRow > -1 && curRow < h && curCol > -1 && curCol < w){
+					val += N[curRow * w + curCol] * M[j*maskWidth+k];
+				}
+			}
+		}
+		P[row * w + col] = val;
+	}
+}  
+
+int initValues(float *data, int width, int heigth){
+    float cont = 1.0;
+  for(int i = 0; i < width*heigth; i++){
+    		if(cont==width+1)
+          cont = 1.0;
+        data[i] = rand() % 10 + 1;
+  			cont+=1;
+  }
+    return 0;
+}
+
+void printData(float *data, int width, int heigth){
+    for(int i = 0; i < heigth; ++i){
+        for(int j = 0; j < width; ++j){
+           cout<<data[(i*width)+j]<<"  ";
+        }
+        printf("\n");
+    }
+
+}
+  
+
+int main()
+{
+  clock_t start,end;
+  float *h_M, *h_N, *h_P;
+  float *d_M, *d_N,*d_P;
+  cudaError_t error = cudaSuccess;
+  
+  int size1 = B * C* sizeof(float);
+  int size2 = A * A* sizeof(float);
+  h_M = (float*)malloc(size1);
+  h_N = (float*)malloc(size2);
+  h_P = (float*)malloc(size1);
+  
+  initValues(h_M, B, C);
+  initValues(h_N, A, A);
+  
+  //convolucion cpu
+  
+  start = clock();
+  conv_cpu(h_M, h_N, h_P, A, B, C);
+  end = clock();
+	double cpu_time_used = double(end - start) / CLOCKS_PER_SEC;
+	printf("Tiempo en CPU: %.10f\n",cpu_time_used);
+  
+  //fin convolucion cpu
+  
+  
+  //convolucion gpu
+  
+  error = cudaMalloc((void**)&d_M,size1);
+    if(error != cudaSuccess){
+        printf("Error reservando memoria para d_M");
+        exit(0);
+    }
+
+    error = cudaMalloc((void**)&d_N,size2);
+    if(error != cudaSuccess){
+        printf("Error reservando memoria para d_N");
+        exit(0);
+    }
+
+    error = cudaMalloc((void**)&d_P,size1);
+    if(error != cudaSuccess){
+        printf("Error reservando memoria para d_P");
+        exit(0);
+    }
+ 
+    
+    error = cudaMemcpy(d_M, h_M, size1, cudaMemcpyHostToDevice);
+	if(error != cudaSuccess){
+        printf("Error copiando datos a d_M");
+        exit(0);
+    }
+    
+    error = cudaMemcpy(d_N, h_N, size2, cudaMemcpyHostToDevice);
+    if(error != cudaSuccess){
+        printf("Error copiando datos a d_N");
+        exit(0);
+    }
+    int blockSize = 6;
+	dim3 dimBlock(blockSize, blockSize, 1);
+	dim3 dimGrid(ceil(B/ float(blockSize)), ceil(C / float(blockSize)), 1);
+  	start = clock();
+    conv_gpu<<<dimGrid, dimBlock>>>(d_M, d_N, d_P, A, B, C);
+  	end = clock();
+    cudaMemcpy(h_P,d_P,size1,cudaMemcpyDeviceToHost);
+  cudaFree(d_M);
+  cudaFree(d_N);
+  cudaFree(d_P);
+	double gpu_time_used = double(end - start) / CLOCKS_PER_SEC;
+	printf("Tiempo en GPU: %.10f\n",gpu_time_used);
+  cout<<"Matriz input"<<endl;
+  printData(h_M, B, C);
+  cout<<endl;
+  cout<<"Matriz mascara"<<endl;
+  printData(h_N, A, A);
+  cout<<endl;
+  cout<<"Convolucion"<<endl;
+  printData(h_P, B, C);
+  
+  //fin convolucion gpu
+  
+	return 0;
+}
