@@ -1,0 +1,39 @@
+Comandos hpc:
+
+Conexion a ssh:
+
+-ssh (usuario)@192.168.26.114
+-ssh -l (usuario) 192.168.26.114
+
+Conocer directorio:
+pwd
+
+copia de archivos
+
+scp (archivo) utp@192.170.25.34:/home/utp    
+
+copia de archivos local de serv a local:
+
+scp usuario@192.168.26.114:/home/usuario/archivo
+
+copia de archivos local de local a serv:
+
+scp archivo usuario@192.168.26.114:/homeshare/usuario/
+
+
+COMANDOS SLURM:
+
+srun -N4 hostname 
+(reserva 4 nodos para correr un programa, el programa es hostname y devuelve los nombres de los nodos)
+
+sbatch (archivo)
+(envio un script de ejecucion)
+
+squeue 
+(tareas en cola)
+
+sinfo
+
+salloc
+(accesar a os nodos solicitados)
+
