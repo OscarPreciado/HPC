@@ -37,7 +37,7 @@ int main() {
 
   //------------------------ master task --------------------------------------
   if (taskid == MASTER) {
-    printf("mpi_add_vector has started with %d tasks.\n", numtask);
+    printf("mpi_sumavectores has started with %d tasks.\n", numtask);
     printf("Initializing arrays...\n");
     for (i = 0; i < SIZE; i++) {
       a[i] = rand() % SIZE;
