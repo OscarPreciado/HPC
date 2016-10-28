@@ -1,0 +1,41 @@
+como correr desde slurm y batch
+
+oapreciado@masterNode:~$ wget https://computing.llnl.gov/tutorials/openMP/samples/C/omp_hello.c
+--2016-10-19 15:19:58--  https://computing.llnl.gov/tutorials/openMP/samples/C/omp_hello.c
+Resolving computing.llnl.gov (computing.llnl.gov)... 198.128.246.10
+Connecting to computing.llnl.gov (computing.llnl.gov)|198.128.246.10|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1169 (1,1K) [text/plain]
+Saving to: ‘omp_hello.c’
+
+omp_hello.c         100%[===================>]   1,14K  --.-KB/s    in 0s      
+
+2016-10-19 15:19:59 (157 MB/s) - ‘omp_hello.c’ saved [1169/1169]
+
+oapreciado@masterNode:~$ nano omp_hello.c
+oapreciado@masterNode:~$ gcc -o omp_hello omp_hello.c -fopenmp
+oapreciado@masterNode:~$ 
+
+
+
+
+
+
+oapreciado@masterNode:~$ ls
+asd  examples.desktop  johnOsorio.out  omp_hello  omp_hello.c  test-job.sh
+oapreciado@masterNode:~$ export OMP_NUM_THREADS=8
+oapreciado@masterNode:~$ srun -N1 ./omp_hello
+Hello World from thread = 1
+Hello World from thread = 5
+Hello World from thread = 2
+Hello World from thread = 6
+Hello World from thread = 4
+Hello World from thread = 7
+Hello World from thread = 3
+Hello World from thread = 0
+Number of threads = 8
+oapreciado@masterNode:~$ nano ompBash.sh
+oapreciado@masterNode:~$ sbatch ompBash.sh
+Submitted batch job 186
+oapreciado@masterNode:~$ nano slurm-186.out
+oapreciado@masterNode:~$ 
