@@ -12,7 +12,7 @@
 
 
 
-__global__ void matrixMulKernel(double *d_a, double *d_b, double *d_c, int height, int width_a, int width_b
+__global__ void matrixMulKernel(double *d_a, double *d_b, double *d_c, int height, int width_a, int width_b){
   int row = blockIdx.y * blockDim.y + threadIdx.y;
   int col = blockIdx.x * blockDim.x + threadIdx.x;
 
